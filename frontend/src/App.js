@@ -104,7 +104,7 @@ function App() {
             <Link to="/">PRODUCTS</Link>
           </li>
           <li>
-            <Link to="/analysis">ANALYSIS/Link>
+            <Link to="/analysis">ANALYSIS</Link>
           </li>
         </ul>
       </aside>
