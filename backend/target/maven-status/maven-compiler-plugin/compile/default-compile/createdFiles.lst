@@ -1,0 +1,5 @@
+com\example\inventorysystem\controller\HomeController.class
+com\example\inventorysystem\controller\ProductController.class
+com\example\inventorysystem\entity\Product.class
+com\example\inventorysystem\InventorysystemApplication.class
+com\example\inventorysystem\repository\ProductRepository.class
