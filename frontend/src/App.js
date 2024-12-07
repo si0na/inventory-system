@@ -16,7 +16,7 @@ function App() {
   // Fetch inventory items
   const getInventoryItems = async () => {
     try {
-      const response = await fetch("http://localhost:8081/api/products");
+      const response = await fetch("http://localhost:8080/api/products");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -32,8 +32,8 @@ function App() {
     e.preventDefault();
     const method = editProductId ? "PUT" : "POST";
     const url = editProductId
-      ? `http://localhost:8081/api/products/${editProductId}`
-      : "http://localhost:8081/api/products";
+      ? `http://localhost:8080/api/products/${editProductId}`
+      : "http://localhost:8080/api/products";
 
     try {
       const response = await fetch(url, {
@@ -57,7 +57,7 @@ function App() {
   // Delete a product
   const deleteInventoryItem = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8081/api/products/${id}`, {
+      const response = await fetch(`http://localhost:8080/api/products/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
