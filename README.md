@@ -1,4 +1,4 @@
-# Inventory Management System
+# StreamlineIMS: Cloud-Hosted Inventory Management System
 
 This is a full-stack Inventory Management System built using Java with Spring Boot on the backend and ReactJS on the frontend. The system allows users to manage product inventory efficiently and provides advanced features such as analytics and documentation for pricing. The backend is deployed at [http://34.72.109.36:8080/api/products](http://34.72.109.36:8080/api/products), and the frontend is accessible at [http://34.56.235.221/](http://34.56.235.221/).
 
