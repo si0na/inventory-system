@@ -1,0 +1,80 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/client-name: gcloud
+    run.googleapis.com/client-version: 502.0.0
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/operation-id: 5c2a34b7-61ef-4082-95aa-cd4700efd2c0
+    run.googleapis.com/urls: '["https://backend-205275947533.us-central1.run.app"]'
+    serving.knative.dev/creator: sionamariamthomas@gmail.com
+    serving.knative.dev/lastModifier: sionamariamthomas@gmail.com
+  creationTimestamp: '2024-12-06T19:06:21.710068Z'
+  generation: 15
+  labels:
+    cloud.googleapis.com/location: us-central1
+  name: backend
+  namespace: '205275947533'
+  resourceVersion: AAYoqaC3tFQ
+  selfLink: /apis/serving.knative.dev/v1/namespaces/205275947533/services/backend
+  uid: d4af33c7-576a-4479-b7fe-0de025e20da6
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '100'
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 502.0.0
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: ujrcbykjwe
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - image: gcr.io/elevated-patrol-443814-j1/backend:latest
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          failureThreshold: 5
+          periodSeconds: 30
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 30
+      serviceAccountName: 205275947533-compute@developer.gserviceaccount.com
+      timeoutSeconds: 600
+  traffic:
+  - percent: 100
+    revisionName: backend-00008-4bk
+status:
+  conditions:
+  - lastTransitionTime: '2024-12-06T20:08:01.657496Z'
+    message: |-
+      Revision 'backend-00008-4bk' is not ready and cannot serve traffic. The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.
+
+      Logs URL: https://console.cloud.google.com/logs/viewer?project=elevated-patrol-443814-j1&resource=cloud_run_revision/service_name/backend/revision_name/backend-00008-4bk&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22backend%22%0Aresource.labels.revision_name%3D%22backend-00008-4bk%22 
+      For more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start
+    reason: HealthCheckContainerError
+    status: 'False'
+    type: Ready
+  - lastTransitionTime: '2024-12-07T08:07:50.794201Z'
+    status: 'True'
+    type: ConfigurationsReady
+  - lastTransitionTime: '2024-12-06T20:08:01.657496Z'
+    message: |-
+      Revision 'backend-00008-4bk' is not ready and cannot serve traffic. The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.
+
+      Logs URL: https://console.cloud.google.com/logs/viewer?project=elevated-patrol-443814-j1&resource=cloud_run_revision/service_name/backend/revision_name/backend-00008-4bk&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22backend%22%0Aresource.labels.revision_name%3D%22backend-00008-4bk%22 
+      For more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start
+    reason: HealthCheckContainerError
+    status: 'False'
+    type: RoutesReady
+  latestCreatedRevisionName: backend-00015-v7v
+  latestReadyRevisionName: backend-00015-v7v
+  observedGeneration: 15

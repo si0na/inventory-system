@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-backend-deployment
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: my-backend
+  template:
+    metadata:
+      labels:
+        app: my-backend
+    spec:
+      containers:
+      - name: my-backend
+        image: gcr.io/elevated-patrol-443814-j1/my-backend:v30 # Update image tag to v11 or as needed
+        ports:
+        - containerPort: 8080 # Exposing the HTTP port for your Spring Boot API
+        - containerPort: 9092  # Exposing the H2 TCP port for remote access
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-backend-service
+spec:
+  selector:
+    app: my-backend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: h2
+      protocol: TCP
+      port: 9092
+      targetPort: 9092
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster

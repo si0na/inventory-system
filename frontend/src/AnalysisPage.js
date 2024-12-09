@@ -7,13 +7,15 @@ import Chart from "chart.js/auto"; // Ensure to import chart.js
 const AnalysisPage = () => {
   const [inventoryList, setInventoryList] = useState([]);
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Default to localhost for development
+
   useEffect(() => {
     // Fetch inventory data from the backend
-    fetch("http://localhost:8081/api/products")
+    fetch(`${backendUrl}/api/products`)
       .then((response) => response.json())
       .then((data) => setInventoryList(data))
       .catch((error) => console.error("Error fetching inventory data:", error));
-  }, []);
+  }, [backendUrl]);
 
   // Process the inventory data for the analysis
   const getChartData = () => {
@@ -21,7 +23,9 @@ const AnalysisPage = () => {
     const quantities = inventoryList.map((item) => item.quantity);
     const prices = inventoryList.map((item) => item.price);
     const totalValues = quantities.map((quantity, index) => quantity * prices[index]); // Calculate total value for each product
-    const averagePrice = prices.reduce((sum, price) => sum + price, 0) / prices.length; // Calculate average price
+    const averagePrice = prices.length
+      ? prices.reduce((sum, price) => sum + price, 0) / prices.length
+      : 0; // Calculate average price
 
     return {
       productNames,
@@ -139,6 +143,7 @@ const AnalysisPage = () => {
 };
 
 export default AnalysisPage;
+
 
 
 

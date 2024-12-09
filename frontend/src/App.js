@@ -13,10 +13,13 @@ function App() {
   });
   const [editProductId, setEditProductId] = useState(null);
 
+  // Use environment variable for backend URL
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   // Fetch inventory items
   const getInventoryItems = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/products");
+      const response = await fetch(`${backendUrl}/api/products`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -32,8 +35,8 @@ function App() {
     e.preventDefault();
     const method = editProductId ? "PUT" : "POST";
     const url = editProductId
-      ? `http://localhost:8080/api/products/${editProductId}`
-      : "http://localhost:8080/api/products";
+      ? `${backendUrl}/api/products/${editProductId}`
+      : `${backendUrl}/api/products`;
 
     try {
       const response = await fetch(url, {
@@ -57,7 +60,7 @@ function App() {
   // Delete a product
   const deleteInventoryItem = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/products/${id}`, {
+      const response = await fetch(`${backendUrl}/api/products/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -93,13 +96,15 @@ function App() {
         <img src={logo} alt="Logo" className="logo" />
         <h2>DASHBOARD</h2>
         <ul>
-        <li>
-            {/* Link to Google Search for Inventory Management Products */}
-            <a href="https://des.mizoram.gov.in/uploads/attachments/67796fee7f93c58969f4a7fdcc7cdd8e/pages-153-retail-prices-of-essential-commodities-.pdf" target="_blank" rel="noopener noreferrer">
+          <li>
+            <a
+              href="https://des.mizoram.gov.in/uploads/attachments/67796fee7f93c58969f4a7fdcc7cdd8e/pages-153-retail-prices-of-essential-commodities-.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               PRICING
             </a>
           </li>
-          {/* Link to Products Page */}
           <li>
             <Link to="/">PRODUCTS</Link>
           </li>
@@ -116,7 +121,7 @@ function App() {
               <div>
                 <header className="header">
                   <center>
-                  <h1>Inventory Management System</h1>
+                    <h1>Inventory Management System</h1>
                   </center>
                 </header>
                 <section className="add-product">
@@ -181,6 +186,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
